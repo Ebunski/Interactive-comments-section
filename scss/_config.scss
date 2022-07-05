@@ -1,0 +1,23 @@
+// SCREEN
+$mobile-screen: 375px;
+
+// PRIMARY COLORS
+$moderate-blue: hsl(238, 40%, 52%);
+$soft-red: hsl(358, 79%, 66%);
+$light-gray-blue: hsl(239, 57%, 85%);
+$pale-red: hsl(357, 100%, 86%);
+
+// NEUTRAL COLORS
+$dark-blue: hsl(212, 24%, 26%);
+$gray-blue: hsl(211, 10%, 45%);
+$gray: hsl(223, 19%, 93%);
+$light-gray: hsl(228, 33%, 97%);
+$white: hsl(0, 0%, 100%);
+
+//FONT
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+$fnt-family: 'Rubik', sans-serif;
+$fnt-size: 16px;
+$fnt-light: 400;
+$fnt-bold: 500;
+$fnt-bolder: 700;

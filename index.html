@@ -1,26 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- displays site properly based on user's device -->
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
-  
-  <title>Frontend Mentor | Interactive comments section</title>
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="32x32"
+			href="./images/favicon-32x32.png"
+		/>
+		<link rel="stylesheet" href="css/index.css" />
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
-</head>
-<body>
+		<title>Frontend Mentor | Interactive comments section</title>
 
-  <!-- Pull dynamic content from the data.json file -->
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
-</body>
+		<!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+		<style>
+			.attribution {
+				font-size: 11px;
+				text-align: center;
+			}
+			.attribution a {
+				color: hsl(228, 45%, 44%);
+			}
+		</style>
+	</head>
+	<body>
+		<ul class="container">
+			<li class="comment-section">
+				<div class="comment">
+					<div class="likes">
+						<button class="plus">
+							<img src="images/icon-plus.svg" alt="icon-plus" />
+						</button>
+						<input type="number" name="likes" value="25" class="num" readonly />
+						<button class="plus">
+							<img src="images/icon-minus.svg" alt="icon-minus" />
+						</button>
+					</div>
+					<div class="identity">
+						<div class="avatar">
+							<img
+								src="images/avatars/image-amyrobson.png"
+								alt="image-amyrobson"
+							/>
+						</div>
+						<div class="name">amyrobson</div>
+					</div>
+					<div class="time">1 month ago</div>
+					<button class="reply-button">
+						<img src="images/icon-reply.svg" alt="icon-reply" />
+						<span>Reply</span>
+					</button>
+					<p class="content">
+						Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
+						tempora, fugit magnam harum distinctio cupiditate placeat esse dolor
+						facere ab dolorum eos, nihil, id aliquid eveniet et enim hic
+						expedita!
+					</p>
+				</div>
+				<div class="reply-section">
+					<div class="hr separator"></div>
+					<div class="content-side">
+						<div class="reply comment">
+							<div class="likes">
+								<button class="plus">
+									<img src="images/icon-plus.svg" alt="icon-plus" />
+								</button>
+								<input
+									type="number"
+									name="likes"
+									value="4"
+									class="num"
+									readonly
+								/>
+								<button class="plus">
+									<img src="images/icon-minus.svg" alt="icon-minus" />
+								</button>
+							</div>
+							<div class="identity">
+								<div class="avatar img">
+									<img
+										src="images/avatars/image-amyrobson.png"
+										alt="image-amyrobson"
+									/>
+								</div>
+								<div class="name">amyrobson</div>
+							</div>
+							<div class="time">1 month ago</div>
+							<button class="reply-button">
+								<img src="images/icon-reply.svg" alt="icon-reply" />
+								<span>Reply</span>
+							</button>
+							<p class="content">
+								Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ex
+								tempora, fugit magnam harum distinctio cupiditate placeat esse
+								dolor facere ab dolorum eos, nihil, id aliquid eveniet et enim
+								hic expedita!
+							</p>
+						</div>
+					</div>
+				</div>
+				<form class="add-my-comment" action="#">
+					<div class="img">
+						<img
+							src="images/avatars/image-juliusomo.webp"
+							alt="image-juliusomo"
+						/>
+					</div>
+					<input type="text" placeholder="Add a comment" />
+					<button type="button">SEND</button>
+				</form>
+			</li>
+		</ul>
+		<!-- Pull dynamic content from the data.json file -->
+
+		<div class="attribution">
+			Challenge by
+			<a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+				>Frontend Mentor</a
+			>. Coded by
+			<a href="https://github.com/Catalyst497">Daniel Duyilemi</a> and
+			<a href=""></a>.
+		</div>
+	</body>
 </html>

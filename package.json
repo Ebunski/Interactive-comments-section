@@ -1,0 +1,27 @@
+{
+	"name": "interactive-comments-section",
+	"version": "1.0.0",
+	"description": "![Design preview for the Interactive comments section coding challenge](./design/desktop-preview.jpg)",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"scss": "node-sass --watch scss -o css"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Catalyst497/Interactive-comments-section.git"
+	},
+	"keywords": [
+		"SCSS",
+		"React"
+	],
+	"author": "Catalyst, Ebunski",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/Catalyst497/Interactive-comments-section/issues"
+	},
+	"homepage": "https://github.com/Catalyst497/Interactive-comments-section#readme",
+	"dependencies": {
+		"node-sass": "^7.0.1"
+	}
+}

@@ -1,27 +1,27 @@
 ul.container {
-	justify-self: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	max-width: 650px;
-	min-height: 100vh;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 650px;
+  min-height: 100vh;
 }
 .comment-section {
-	@import 'comment';
-	.reply-section {
-		display: flex;
-		.separator {
-		// This is where I got stuck. maybe you could help
-			display: flex;
-			flex-flow: column;
-			height: 90%;
-			width: 5px;
-			background-color: red;
-			@include margin-inline(2rem);
-			@include margin-block(auto);
-		}
-	}
-	.add-my-comment {
-		@extend .flex;
-	}
+  @import "comment";
+  .reply-section {
+    margin-left: 50px;
+    .separator {
+      // This is where I got stuck. maybe you could help
+      display: flex;
+      flex-flow: column;
+      height: 90%;
+      width: 5px;
+      background-color: red;
+      @include margin-inline(2rem);
+      @include margin-block(auto);
+    }
+  }
+  .add-my-comment {
+    @extend .flex;
+  }
 }

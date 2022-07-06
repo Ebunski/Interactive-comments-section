@@ -11,8 +11,10 @@ const AppContext = React.createContext();
 
 export function AppProvider({ children }) {
   const currUser = data.currentUser;
+
   const [comments, setComments] = useState(data.comments);
   const [isReplying, setIsReplying] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(true);
 
   function vote(id, type) {
     const voted = comments.map((x) => {
@@ -22,7 +24,6 @@ export function AppProvider({ children }) {
       }
       return x;
     });
-
     setComments(voted);
   }
 
@@ -35,7 +36,29 @@ export function AppProvider({ children }) {
   function handleSubmit(text, parentId) {
     setComments((prev) => [...prev, text]);
   }
+
+  function handleDelete(id) {
+    setIsModalOpen(true);
+    // let newList;
+    // if (parentName === "") {
+    //   newList = comments.filter((x) => x.id !== id);
+    // } else {
+    //   newList = comments.map((x) =>
+    //     x.username === parentName ? x.filter((y) => y.id !== id) : x
+    //   );
+    // }
+
+    // setComments(newList);
+
+    // console.log(id, parentName);
+  }
+
+  function confirm(decision) {
+    setIsModalOpen(false);
+  }
+
   console.log(comments);
+
   return (
     <AppContext.Provider
       value={{
@@ -45,11 +68,14 @@ export function AppProvider({ children }) {
         del,
         reply,
         isReplying,
+        isModalOpen,
 
         currUser,
         comments,
         vote,
         handleSubmit,
+        handleDelete,
+        confirm,
       }}
     >
       {children}

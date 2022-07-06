@@ -14,7 +14,7 @@ export default function Markdown(props) {
     const input = {
       id: Math.random().toString(36).substring(2, 9), // *********//
       content: replyText,
-      createdAt: new Date().toLocaleString(), //timeSince(new Date(Date.now()))
+      createdAt: new Date().toLocaleDateString(), //timeSince(new Date(Date.now()))
       score: 0,
       replyingTo: "",
       user: currUser, // never pass userId to API

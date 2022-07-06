@@ -1,0 +1,47 @@
+import React, { useState } from "react";
+import { useGlobalContext } from "../context";
+import timeSince from "../timeTracker";
+
+export default function Markdown(props) {
+  const { isReplying, currUser, handleSubmit } = useGlobalContext();
+  const [replyText, setReplyText] = useState("");
+
+  const isDisabled = replyText.length === 0; //***** *//
+
+  function collector(event) {
+    event.preventDefault();
+
+    const input = {
+      id: Math.random().toString(36).substring(2, 9), // *********//
+      content: replyText,
+      createdAt: new Date().toLocaleString(), //timeSince(new Date(Date.now()))
+      score: 0,
+      replyingTo: "",
+      user: currUser, // never pass userId to API
+      replies: [],
+    };
+
+    handleSubmit(input);
+
+    setReplyText("");
+  }
+  return (
+    <>
+      (
+      <form className="add-my-comment" onSubmit={collector}>
+        <div className="img">
+          <img src={currUser.image.webp} alt={currUser.username} />
+        </div>
+        {/* changed to textarea */}
+        <textarea
+          type="text"
+          placeholder="Add a comment"
+          value={replyText}
+          onChange={(e) => setReplyText(e.target.value)}
+        />
+        <button disabled={isDisabled}>{props.label}</button>
+      </form>
+      )
+    </>
+  );
+}

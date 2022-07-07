@@ -4,16 +4,17 @@ import timeSince from "../timeTracker";
 
 export default function Markdown(props) {
   const { currUser, handleSubmit } = useGlobalContext();
-  const [replyText, setReplyText] = useState("");
+  const { label, replyId = null } = props;
+  const [text, setText] = useState("");
 
-  const isDisabled = replyText.length === 0; //***** *//
+  const isDisabled = text.length === 0; //***** *//
 
   function onSubmit(event) {
     event.preventDefault();
 
     const input = {
       id: Math.random().toString(36).substring(2, 9), // *********//
-      content: replyText,
+      content: text,
       createdAt: new Date().toLocaleDateString(), //timeSince(new Date(Date.now()))
       score: 0,
       replyingTo: "",
@@ -21,8 +22,8 @@ export default function Markdown(props) {
       replies: [],
     };
 
-    handleSubmit(input);
-    setReplyText("");
+    handleSubmit(input, replyId);
+    setText("");
   }
   return (
     <>
@@ -34,10 +35,10 @@ export default function Markdown(props) {
         <textarea
           type="text"
           placeholder="Add a comment"
-          value={replyText}
-          onChange={(e) => setReplyText(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         />
-        <button disabled={isDisabled}>{props.label}</button>
+        <button disabled={isDisabled}>{label}</button>
       </form>
     </>
   );

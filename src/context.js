@@ -14,7 +14,8 @@ export function AppProvider({ children }) {
 
   const [comments, setComments] = useState(data.comments);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currId, setCurrId] = useState(null);
+  const [currId, setCurrId] =
+    useState(null); /*for replying,deleting,rendering for an item in list */
 
   const [actionType, setActionType] = useState(null);
 
@@ -29,8 +30,15 @@ export function AppProvider({ children }) {
     setComments(voted);
   }
 
-  function handleSubmit(text, parentName) {
+  function handleSubmit(text, parentId) {
+    if (parentId) {
+      const newComments = comments.map((x) =>
+        x.id === parentId ? { ...x, replies: [...x.replies, text] } : x
+      );
+      return setComments(newComments);
+    }
     setComments((prev) => [...prev, text]);
+    setCurrId(null);
   }
 
   function handleDelete(id) {
@@ -39,8 +47,10 @@ export function AppProvider({ children }) {
   }
 
   function confirm(decision) {
-    let deleted = comments.filter((x) => x.id !== currId);
-    // let deleted = comments.map((x) => x.replies.filter((y) => y.id !== currId));
+    let deleted = comments
+      .map((x) => ({ ...x, replies: x.replies.filter((x) => x.id !== currId) }))
+      .filter((x) => x.id !== currId);
+
     decision && setComments(deleted);
     setIsModalOpen(false);
     setCurrId(null);

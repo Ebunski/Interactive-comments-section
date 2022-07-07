@@ -3,12 +3,12 @@ import { useGlobalContext } from "../context";
 import timeSince from "../timeTracker";
 
 export default function Markdown(props) {
-  const { isReplying, currUser, handleSubmit } = useGlobalContext();
+  const { currUser, handleSubmit } = useGlobalContext();
   const [replyText, setReplyText] = useState("");
 
   const isDisabled = replyText.length === 0; //***** *//
 
-  function collector(event) {
+  function onSubmit(event) {
     event.preventDefault();
 
     const input = {
@@ -22,13 +22,11 @@ export default function Markdown(props) {
     };
 
     handleSubmit(input);
-
     setReplyText("");
   }
   return (
     <>
-      (
-      <form className="add-my-comment" onSubmit={collector}>
+      <form className="add-my-comment" onSubmit={onSubmit}>
         <div className="img">
           <img src={currUser.image.webp} alt={currUser.username} />
         </div>
@@ -41,7 +39,6 @@ export default function Markdown(props) {
         />
         <button disabled={isDisabled}>{props.label}</button>
       </form>
-      )
     </>
   );
 }

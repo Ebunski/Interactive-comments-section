@@ -13,7 +13,7 @@ export default function App() {
     <ul className="container">
       <li className="comment-section">
         {commentList}
-        <Markdown type="write" label="Send" />
+        <Markdown label="Send" />
         {isModalOpen && <Modal />}
       </li>
     </ul>

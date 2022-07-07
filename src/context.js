@@ -13,8 +13,10 @@ export function AppProvider({ children }) {
   const currUser = data.currentUser;
 
   const [comments, setComments] = useState(data.comments);
-  const [isReplying, setIsReplying] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currId, setCurrId] = useState(null);
+
+  const [actionType, setActionType] = useState(null);
 
   function vote(id, type) {
     const voted = comments.map((x) => {
@@ -27,37 +29,32 @@ export function AppProvider({ children }) {
     setComments(voted);
   }
 
-  //   function input(){
-  //     return{
-  //         id: Math.random().toString
-  //     }
-  //   }
-
-  function handleSubmit(text, parentId) {
+  function handleSubmit(text, parentName) {
     setComments((prev) => [...prev, text]);
   }
 
   function handleDelete(id) {
     setIsModalOpen(true);
-    // let newList;
-    // if (parentName === "") {
-    //   newList = comments.filter((x) => x.id !== id);
-    // } else {
-    //   newList = comments.map((x) =>
-    //     x.username === parentName ? x.filter((y) => y.id !== id) : x
-    //   );
-    // }
-
-    // setComments(newList);
-
-    // console.log(id, parentName);
+    setCurrId(id);
   }
 
   function confirm(decision) {
+    let deleted = comments.filter((x) => x.id !== currId);
+    // let deleted = comments.map((x) => x.replies.filter((y) => y.id !== currId));
+    decision && setComments(deleted);
     setIsModalOpen(false);
+    setCurrId(null);
   }
-
   console.log(comments);
+
+  // function handleEdit(id) {
+  //   setCurrId(id);
+  // }
+
+  function changeAction(id, type) {
+    setCurrId(id);
+    setActionType(type);
+  }
 
   return (
     <AppContext.Provider
@@ -67,15 +64,18 @@ export function AppProvider({ children }) {
         edit,
         del,
         reply,
-        isReplying,
-        isModalOpen,
 
-        currUser,
         comments,
+        isModalOpen,
+        currUser,
+        currId,
+        actionType,
+
         vote,
         handleSubmit,
         handleDelete,
         confirm,
+        changeAction,
       }}
     >
       {children}

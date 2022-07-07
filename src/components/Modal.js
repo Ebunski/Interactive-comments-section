@@ -2,9 +2,12 @@ import React from "react";
 import { useGlobalContext } from "../context";
 
 export default function Modal() {
-  const { isModalOpen, confirm } = useGlobalContext();
+  const { confirm } = useGlobalContext();
+
+  // MOdal component is unstyled.
+  // displays onclick of the delete icon at bottom of the page
   return (
-    <div className="modal-container">
+    <div className="modal-overlay">
       <div className="modal-center">
         <div className="modal-content">
           <h1>Delete Comment</h1>
@@ -13,8 +16,8 @@ export default function Modal() {
             comment and can't be undone
           </p>
           <footer>
-            <button>No, cancel</button>
-            <button>Yes, delete</button>
+            <button onClick={() => confirm(false)}>No, cancel</button>
+            <button onClick={() => confirm(true)}>Yes, delete</button>
           </footer>
         </div>
       </div>

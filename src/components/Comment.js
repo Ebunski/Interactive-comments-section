@@ -1,23 +1,52 @@
 import React from "react";
-import Replies from "./Replies";
 import { useGlobalContext } from "../context";
+import Markdown from "./Markdown";
 
 export default function Comment(props) {
-  const { vote, plus, minus, reply, del, edit, currUser } = useGlobalContext();
-  const { id, content, createdAt, score, user, replies } = props;
+  const {
+    //functions
+    vote,
+    changeAction,
+    handleDelete,
 
-  const tenMinutes = 150000;
-  const timeElapsed = new Date() - new Date(createdAt) > tenMinutes;
-  const canEdit = user.username === currUser.username && !timeElapsed;
+    //icons
+    plus,
+    minus,
+    reply,
+    del,
+    edit,
 
-  const replyList = replies.map((x) => <Replies key={x.id} {...x} />);
+    //states
+    currUser,
+    currId,
+    actionType,
+  } = useGlobalContext();
+  const {
+    id,
+    content,
+    createdAt,
+    score,
+    user,
+    replies = [],
+    replyingTo = "",
+    parentId = null, //used to place the replies
+  } = props;
+
+  // const fiveMinutes = 300000;
+  // const timeElapsed = new Date() - new Date(createdAt) > fiveMinutes;
+  const authentication = user.username === currUser.username;
+  const canEdit = authentication; //{&& !timeElapsed;
+
+  const replyId = parentId ? parentId : id; //passed to markdown to place reply
+
+  const replyList = replies.map((x) => (
+    <Comment key={x.id} {...x} replyingTo={x.replyingTo} parentId={id} />
+  )); //-----------***recursive***---------//
 
   /*
 =============== 
 update styles for num
 
-new comments and
-new replies at the end
 
 Comment component
 ===============
@@ -25,12 +54,12 @@ Comment component
 
   return (
     <>
-      <section className="comment">
+      <article className="comment">
         <div className="likes">
           <button className="plus" onClick={() => vote(id, "plus")}>
             <img src={plus} alt="icon-plus" />
           </button>
-
+          {/*----- button not fully functional for replies ----*/}
           <p className="num">{score}</p>
           {/* Changed the className from plus to minus :)*/}
           <button className="minus">
@@ -42,37 +71,54 @@ Comment component
           </button>
         </div>
 
-        <article className="identity">
+        <div className="identity">
           <img className="avatar" src={user.image.png} alt={user.username} />
-
           <div className="name">{user.username}</div>
-        </article>
+          {/* ---style this----(displays if its current user)*/}
+          {authentication && <button>you</button>}
+        </div>
         <div className="time">{createdAt} </div>
 
-        {/* //conditionally renders if five minutes has not elapsed and it is the user id */}
+        {/* renders edit and delete if five minutes has not elapsed and it is the user id */}
         {canEdit ? (
           <div>
-            <button className="reply-button">
+            <button className="reply-button" onClick={() => handleDelete(id)}>
               <img src={del} alt="icon-delete" />
               <span>Delete</span>
             </button>
 
-            <button className="reply-button">
+            <button
+              className="reply-button"
+              onClick={() => changeAction(id, "Edit")}
+            >
               <img src={edit} alt="icon-edit" />
               <span>Edit</span>
             </button>
           </div>
         ) : (
-          <button className="reply-button">
+          // ---------------otherwise renders reply button--------------------//
+          <button
+            className="reply-button"
+            onClick={() => changeAction(id, "reply")}
+          >
             <img src={reply} alt="icon-reply" />
             <span>Reply</span>
           </button>
         )}
 
-        <p className="content">{content}</p>
-      </section>
+        <p className="content">
+          {replyingTo !== "" && <span>@{replyingTo} </span>} {/* if a reply */}
+          {content}
+        </p>
+      </article>
 
-      {replies.length > 0 && replyList}
+      {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
+      {actionType === "reply" && currId === id ? (
+        <Markdown label="reply" replyId={replyId} />
+      ) : null}
+
+      {/*--------------replies ---------------------------*/}
+      {replies.length > 0 && <div className="reply-section">{replyList}</div>}
     </>
   );
 }

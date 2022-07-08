@@ -11,8 +11,13 @@ const AppContext = React.createContext();
 
 export function AppProvider({ children }) {
   const currUser = data.currentUser;
+
   const [comments, setComments] = useState(data.comments);
-  const [isReplying, setIsReplying] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currId, setCurrId] =
+    useState(null); /*for replying,deleting,rendering for an item in list */
+
+  const [actionType, setActionType] = useState(null);
 
   function vote(id, type) {
     const voted = comments.map((x) => {
@@ -22,20 +27,45 @@ export function AppProvider({ children }) {
       }
       return x;
     });
-
     setComments(voted);
   }
 
-  //   function input(){
-  //     return{
-  //         id: Math.random().toString
-  //     }
-  //   }
-
   function handleSubmit(text, parentId) {
+    if (parentId) {
+      const newComments = comments.map((x) =>
+        x.id === parentId ? { ...x, replies: [...x.replies, text] } : x
+      );
+      return setComments(newComments);
+    }
     setComments((prev) => [...prev, text]);
+    setCurrId(null);
+  }
+
+  function handleDelete(id) {
+    setIsModalOpen(true);
+    setCurrId(id);
+  }
+
+  function confirm(decision) {
+    let deleted = comments
+      .map((x) => ({ ...x, replies: x.replies.filter((x) => x.id !== currId) }))
+      .filter((x) => x.id !== currId);
+
+    decision && setComments(deleted);
+    setIsModalOpen(false);
+    setCurrId(null);
   }
   console.log(comments);
+
+  // function handleEdit(id) {
+  //   setCurrId(id);
+  // }
+
+  function changeAction(id, type) {
+    setCurrId(id);
+    setActionType(type);
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -44,12 +74,18 @@ export function AppProvider({ children }) {
         edit,
         del,
         reply,
-        isReplying,
 
-        currUser,
         comments,
+        isModalOpen,
+        currUser,
+        currId,
+        actionType,
+
         vote,
         handleSubmit,
+        handleDelete,
+        confirm,
+        changeAction,
       }}
     >
       {children}

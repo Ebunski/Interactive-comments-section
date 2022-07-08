@@ -32,7 +32,8 @@ Comment component
           </button>
 
           <p className="num">{score}</p>
-          <button className="plus">
+          {/* Changed the className from plus to minus :)*/}
+          <button className="minus">
             <img
               src={minus}
               alt="icon-minus"

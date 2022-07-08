@@ -14,9 +14,8 @@ export function AppProvider({ children }) {
 
   const [comments, setComments] = useState(data.comments);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currId, setCurrId] =
-    useState(null); /*for replying,deleting,rendering for an item in list */
-
+  /*for replying,deleting,rendering for an item in list */
+  const [currId, setCurrId] = useState(null);
   const [actionType, setActionType] = useState(null);
 
   function vote(id, type) {

@@ -3,7 +3,7 @@ import { useGlobalContext } from "../context";
 import timeSince from "../timeTracker";
 
 export default function Markdown(props) {
-  const { currUser, handleSubmit } = useGlobalContext();
+  const { currUser, currId, actionType, handleSubmit } = useGlobalContext();
   const { label, replyId = null } = props;
   const [text, setText] = useState("");
 
@@ -26,11 +26,14 @@ export default function Markdown(props) {
     setText("");
   }
   return (
-    <>
+    <div>
       <form className="add-my-comment" onSubmit={onSubmit}>
-        <div className="img">
-          <img src={currUser.image.webp} alt={currUser.username} />
-        </div>
+        {actionType !== "edit" && (
+          <div className="img">
+            <img src={currUser.image.webp} alt={currUser.username} />
+          </div>
+        )}
+
         {/* changed to textarea */}
         <textarea
           type="text"
@@ -38,8 +41,16 @@ export default function Markdown(props) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        <button disabled={isDisabled}>{label}</button>
+        {actionType !== "edit" && (
+          <button disabled={isDisabled}>{label}</button>
+        )}
       </form>
-    </>
+      {/*please style this div such that the button is on the right (click edit to view)*/}
+      {actionType === "edit" && (
+        <div>
+          <button>{label}</button>
+        </div>
+      )}
+    </div>
   );
 }

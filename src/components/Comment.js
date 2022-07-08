@@ -88,7 +88,7 @@ Comment component
 
             <button
               className="reply-button"
-              onClick={() => changeAction(id, "Edit")}
+              onClick={() => changeAction(id, "edit")}
             >
               <img src={edit} alt="icon-edit" />
               <span>Edit</span>
@@ -104,17 +104,21 @@ Comment component
             <span>Reply</span>
           </button>
         )}
-
-        <p className="content">
+        {/*--------Here, displays the markdown if its in diting state else displays the comment-content----*/}
+        <div className="content">
           {replyingTo !== "" && <span>@{replyingTo} </span>} {/* if a reply */}
-          {content}
-        </p>
+          {actionType === "edit" && currId === id ? (
+            <Markdown label="update" />
+          ) : (
+            <p>{content}</p>
+          )}
+        </div>
       </article>
 
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
-      {actionType === "reply" && currId === id ? (
+      {actionType === "reply" && currId === id && (
         <Markdown label="reply" replyId={replyId} />
-      ) : null}
+      )}
 
       {/*--------------replies ---------------------------*/}
       {replies.length > 0 && <div className="reply-section">{replyList}</div>}

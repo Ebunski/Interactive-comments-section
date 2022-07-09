@@ -1,3 +1,6 @@
+div#root {
+  display: grid;
+}
 ul.container {
   justify-self: center;
   display: flex;
@@ -9,16 +12,17 @@ ul.container {
 .comment-section {
   @import "comment";
   .reply-section {
-    margin-left: 50px;
-    .separator {
-      // This is where I got stuck. maybe you could help
-      display: flex;
-      flex-flow: column;
-      height: 90%;
-      width: 5px;
-      background-color: red;
-      @include margin-inline(2rem);
-      @include margin-block(auto);
+    position: relative;
+    margin-left: 60px;
+    &::before {
+      content: " ";
+      position: absolute;
+      display: block;
+      width: 2px;
+      background: darken($light-gray, 5%);
+      left: -30px;
+      top: 0.7rem;
+      bottom: 0.7rem;
     }
   }
   .add-my-comment {

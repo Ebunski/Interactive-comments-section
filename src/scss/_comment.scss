@@ -7,7 +7,7 @@
   grid-template-areas:
     "li id id tm tm re"
     "li ct ct ct ct ct"
-    "li ct ct ct ct ct";
+    "sm ct ct ct ct ct";
   gap: 1rem 0;
   align-items: center;
   padding: 1rem;
@@ -23,9 +23,13 @@
     width: 2rem;
     background-color: $light-gray;
 
-    input[type="number"] {
-      @include padding-block(1rem);
+    p {
+      @include padding-block(0.5rem);
+      @extend .flex;
+      justify-content: center;
+      text-align: center;
       color: $moderate-blue;
+      font-size: 14px;
       font-weight: $fnt-bolder;
     }
     > * {

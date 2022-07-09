@@ -1,6 +1,7 @@
 import React from "react";
 import { useGlobalContext } from "../context";
 import Markdown from "./Markdown";
+import TimeAgo from "react-timeago";
 
 export default function Comment(props) {
   const {
@@ -32,16 +33,22 @@ export default function Comment(props) {
     parentId = null, //used to place the replies
   } = props;
 
-  // const fiveMinutes = 300000;
-  // const timeElapsed = new Date() - new Date(createdAt) > fiveMinutes;
+  const fiveMinutes = 300000;
+  const timeElapsed = new Date() - new Date(createdAt) > fiveMinutes;
   const authentication = user.username === currUser.username;
-  const canEdit = authentication; //{&& !timeElapsed;
+  const canEdit = authentication && !timeElapsed;
 
   const replyId = parentId ? parentId : id; //passed to markdown to place reply
 
   const replyList = replies.map((x) => (
     <Comment key={x.id} {...x} replyingTo={x.replyingTo} parentId={id} />
   )); //-----------***recursive***---------//
+
+  function formatter(value, unit, suffix) {
+    if (unit === "second") return "Just now";
+    if (value > 1) return `${value} ${unit}s ${suffix}`;
+    return `${value} ${unit} ${suffix}`;
+  }
 
   /*
 =============== 
@@ -73,7 +80,9 @@ Comment component
           {/* ---style this----(displays if its current user)*/}
           {authentication && <button>you</button>}
         </div>
-        <div className="time">{createdAt} </div>
+        <div className="time">
+          <TimeAgo date={createdAt} formatter={formatter} />
+        </div>
 
         {/* renders edit and delete if five minutes has not elapsed and it is the user id */}
         {canEdit ? (

@@ -75,7 +75,6 @@ export function AppProvider({ children }) {
     setIsModalOpen(false);
     setCurrId(null);
   }
-  console.log(new Date().getMinutes());
 
   function handleEdit(id, text) {
     const updatedComments = comments.map((x) =>

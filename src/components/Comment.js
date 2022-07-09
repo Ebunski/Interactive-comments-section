@@ -54,20 +54,17 @@ Comment component
 
   return (
     <>
+      {/*To fix article-li dispute*/}
       <article className="comment">
         <div className="likes">
           <button className="plus" onClick={() => vote(id, "plus")}>
             <img src={plus} alt="icon-plus" />
           </button>
-          {/*----- button not fully functional for replies ----*/}
+
           <p className="num">{score}</p>
-          {/* Changed the className from plus to minus :)*/}
-          <button className="minus">
-            <img
-              src={minus}
-              alt="icon-minus"
-              onClick={() => vote(id, "minus")}
-            />
+
+          <button className="minus" onClick={() => vote(id, "minus")}>
+            <img src={minus} alt="icon-minus" />
           </button>
         </div>
 
@@ -89,7 +86,7 @@ Comment component
 
             <button
               className="reply-button"
-              onClick={() => changeAction(id, "Edit")}
+              onClick={() => changeAction(id, "edit")}
             >
               <img src={edit} alt="icon-edit" />
               <span>Edit</span>
@@ -105,18 +102,20 @@ Comment component
             <span>Reply</span>
           </button>
         )}
-
-        <p className="content">
+        {/*--------Here, displays the markdown if its in editing state else displays the comment-content----*/}
+        <div className="content">
           {replyingTo !== "" && <span>@{replyingTo} </span>} {/* if a reply */}
-          {content}
-        </p>
+          {actionType === "edit" && currId === id ? (
+            <Markdown label="update" initialText={content} />
+          ) : (
+            <p>{content}</p>
+          )}
+        </div>
       </article>
-
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
-      {actionType === "reply" && currId === id ? (
+      {actionType === "reply" && currId === id && (
         <Markdown label="reply" replyId={replyId} />
-      ) : null}
-
+      )}
       {/*--------------replies ---------------------------*/}
       {replies.length > 0 && <div className="reply-section">{replyList}</div>}
     </>

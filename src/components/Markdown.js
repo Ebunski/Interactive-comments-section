@@ -23,7 +23,7 @@ export default function Markdown(props) {
         id: Math.random().toString(36).substring(2, 9), // *********//
         content: text,
         createdAt: new Date(), //timeSince(new Date(Date.now()))
-        score: 0,
+        score: 1,
         replyingTo: "",
         user: currUser, // never pass userId to API
         replies: [],

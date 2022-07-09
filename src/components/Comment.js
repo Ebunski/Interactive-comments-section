@@ -54,19 +54,16 @@ Comment component
 
   return (
     <>
+      {/*To fix article-li dispute*/}
       <article className="comment">
         <div className="likes">
           <button className="plus" onClick={() => vote(id, "plus")}>
             <img src={plus} alt="icon-plus" />
           </button>
-          {/*----- button not fully functional for replies ----*/}
+
           <p className="num">{score}</p>
-          <button className="plus">
-            <img
-              src={minus}
-              alt="icon-minus"
-              onClick={() => vote(id, "minus")}
-            />
+          <button className="plus" onClick={() => vote(id, "minus")}>
+            <img src={minus} alt="icon-minus" />
           </button>
         </div>
 
@@ -104,22 +101,20 @@ Comment component
             <span>Reply</span>
           </button>
         )}
-        {/*--------Here, displays the markdown if its in diting state else displays the comment-content----*/}
+        {/*--------Here, displays the markdown if its in editing state else displays the comment-content----*/}
         <div className="content">
           {replyingTo !== "" && <span>@{replyingTo} </span>} {/* if a reply */}
           {actionType === "edit" && currId === id ? (
-            <Markdown label="update" />
+            <Markdown label="update" initialText={content} />
           ) : (
             <p>{content}</p>
           )}
         </div>
       </article>
-
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
       {actionType === "reply" && currId === id && (
         <Markdown label="reply" replyId={replyId} />
       )}
-
       {/*--------------replies ---------------------------*/}
       {replies.length > 0 && <div className="reply-section">{replyList}</div>}
     </>

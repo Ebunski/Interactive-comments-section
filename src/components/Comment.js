@@ -54,8 +54,8 @@ Comment component
 
 	return (
 		<>
+			{/*To fix article-li dispute*/}
 			<article className="comment">
-				{/* --Cat-- Changed the imgs to svgs cause I needed the to change the fill on hover ---- */}
 				<div className="likes">
 					<button className="plus" onClick={() => vote(id, 'plus')}>
 						<svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">
@@ -63,20 +63,18 @@ Comment component
 								d="M6.33 10.896c.137 0 .255-.05.354-.149.1-.1.149-.217.149-.354V7.004h3.315c.136 0 .254-.05.354-.149.099-.1.148-.217.148-.354V5.272a.483.483 0 0 0-.148-.354.483.483 0 0 0-.354-.149H6.833V1.4a.483.483 0 0 0-.149-.354.483.483 0 0 0-.354-.149H4.915a.483.483 0 0 0-.354.149c-.1.1-.149.217-.149.354v3.37H1.08a.483.483 0 0 0-.354.15c-.1.099-.149.217-.149.353v1.23c0 .136.05.254.149.353.1.1.217.149.354.149h3.333v3.39c0 .136.05.254.15.353.098.1.216.149.353.149H6.33Z"
 								fill="#C5C6EF"
 							/>
-						</svg>
-						{/* <img src={plus} alt="icon-plus" /> */}
+						</svg>{' '}
 					</button>
-					{/*----- button not fully functional for replies ----*/}
+
 					<p className="num">{score}</p>
+
 					<button className="minus" onClick={() => vote(id, 'minus')}>
 						<svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
 							<path
 								d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
 								fill="#C5C6EF"
 							/>
-						</svg>
-
-						{/* <img src={minus} alt="icon-minus" /> */}
+						</svg>{' '}
 					</button>
 				</div>
 
@@ -91,12 +89,12 @@ Comment component
 				{/* renders edit and delete if five minutes has not elapsed and it is the user id */}
 				{canEdit ? (
 					<div className="edit-delete">
-						<button className="delete" onClick={() => handleDelete(id)}>
+						<button className="edit" onClick={() => handleDelete(id)}>
 							<img src={del} alt="icon-delete" />
 							<span>Delete</span>
 						</button>
 
-						<button className="edit" onClick={() => changeAction(id, 'Edit')}>
+						<button className="delete" onClick={() => changeAction(id, 'edit')}>
 							<img src={edit} alt="icon-edit" />
 							<span>Edit</span>
 						</button>
@@ -111,19 +109,20 @@ Comment component
 						<span>Reply</span>
 					</button>
 				)}
-
-				<p className="content">
-					{/* --Cat-- This is not yet working for new replies o */}
+				{/*--------Here, displays the markdown if its in editing state else displays the comment-content----*/}
+				<div className="content">
 					{replyingTo !== '' && <span>@{replyingTo} </span>} {/* if a reply */}
-					{content}
-				</p>
+					{actionType === 'edit' && currId === id ? (
+						<Markdown label="update" initialText={content} />
+					) : (
+						<p>{content}</p>
+					)}
+				</div>
 			</article>
-
 			{/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
-			{actionType === 'reply' && currId === id ? (
+			{actionType === 'reply' && currId === id && (
 				<Markdown label="reply" replyId={replyId} />
-			) : null}
-
+			)}
 			{/*--------------replies ---------------------------*/}
 			{replies.length > 0 && <div className="reply-section">{replyList}</div>}
 		</>

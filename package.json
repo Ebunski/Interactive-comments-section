@@ -8,7 +8,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "scss": "node-sass --watch scss -o css"
+    "scss": "node-sass --watch src/scss -o src/css"
   },
   "repository": {
     "type": "git",
@@ -53,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://github.com/Catalyst497/Interactive-comments-section/#readme"
 }

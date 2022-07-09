@@ -6,13 +6,11 @@
 }
 body {
   background-color: $light-gray;
-  display: grid;
   color: $gray-blue;
   font-family: $fnt-family;
   font-size: $fnt-size;
   text-align: start;
   font-weight: 400;
-  overflow-y: auto;
 }
 h1 {
   font-size: 1.8rem;

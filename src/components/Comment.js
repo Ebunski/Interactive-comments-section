@@ -62,7 +62,8 @@ Comment component
           </button>
 
           <p className="num">{score}</p>
-          <button className="plus" onClick={() => vote(id, "minus")}>
+
+          <button className="minus" onClick={() => vote(id, "minus")}>
             <img src={minus} alt="icon-minus" />
           </button>
         </div>

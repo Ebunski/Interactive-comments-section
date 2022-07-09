@@ -1,67 +1,108 @@
 .comment {
-  background-color: $white;
-  border-radius: 5px;
-  border: 1px solid lighten(gray, 40%);
-  display: grid;
-  grid-template-columns: 4rem repeat(4, 1fr);
-  grid-template-areas:
-    "li id id tm tm re"
-    "li ct ct ct ct ct"
-    "sm ct ct ct ct ct";
-  gap: 1rem 0;
-  align-items: center;
-  padding: 1rem;
-  @include margin-block(0.5rem);
-  .likes {
-    grid-area: li;
-    margin: auto;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    @extend .flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 2rem;
-    background-color: $light-gray;
-
-    p {
-      @include padding-block(0.5rem);
-      @extend .flex;
-      justify-content: center;
-      text-align: center;
-      color: $moderate-blue;
-      font-size: 14px;
-      font-weight: $fnt-bolder;
-    }
-    > * {
-      width: 100%;
-      background-color: transparent;
-    }
-  }
-  .identity {
-    @extend .flex;
-    justify-content: flex-start;
-    grid-area: id;
-    font-weight: $fnt-bolder;
-    color: $dark-blue;
-    gap: 1rem;
-    img {
-      height: 2rem;
-    }
-  }
-  .time {
-    grid-area: tm;
-  }
-  .reply-button {
-    grid-area: re;
-    background-color: transparent;
-    color: $moderate-blue;
-    @extend .flex;
-    justify-content: center;
-    gap: 0.5rem;
-    font-weight: $fnt-bolder;
-  }
-  .content {
-    grid-area: ct;
-    max-width: 24rem;
-  }
+	background-color: $white;
+	border-radius: 5px;
+	border: $block-border;
+	display: grid;
+	grid-template-columns: 4rem repeat(4, 1fr);
+	grid-template-areas:
+		'li id id tm tm re'
+		'li ct ct ct ct ct'
+		'sm ct ct ct ct ct';
+	gap: 1rem 0;
+	align-items: center;
+	padding: 1rem;
+	@include margin-block(0.5rem);
+	.likes {
+		grid-area: li;
+		margin: auto;
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		@extend .flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 2rem;
+		background-color: $light-gray;
+		button {
+			svg {
+				path {
+					@include transition(fill);
+				}
+			}
+			&:hover path {
+				fill: $moderate-blue;
+			}
+		}
+		p {
+			@include padding-block(0.5rem);
+			@extend .flex;
+			justify-content: center;
+			text-align: center;
+			color: $moderate-blue;
+			font-size: 14px;
+			font-weight: $fnt-bolder;
+		}
+		> * {
+			width: 100%;
+			background-color: transparent;
+		}
+	}
+	.identity {
+		@extend .flex;
+		justify-content: flex-start;
+		grid-area: id;
+		font-weight: $fnt-bolder;
+		color: $dark-blue;
+		gap: 1rem;
+		margin-right: 1rem;
+		img {
+			height: 2rem;
+		}
+		> button {
+			background-color: $moderate-blue;
+			color: $white;
+			@include padding-inline(0.3rem);
+			padding-bottom: 0.1rem;
+			border: none;
+		}
+	}
+	.time {
+		grid-area: tm;
+	}
+	.reply-button {
+		grid-area: re;
+		background-color: transparent;
+		color: $moderate-blue;
+		@extend .flex;
+		justify-content: center;
+		gap: 0.5rem;
+		font-weight: $fnt-bolder;
+		@include fade-out(0.5);
+	}
+	.edit-delete {
+		@extend .reply-button;
+		gap: 0.7rem;
+		@include fade-out(1);
+		.edit,
+		.delete {
+			@extend .flex;
+			gap: 0.5rem;
+			font-weight: inherit;
+		}
+		.edit {
+			color: inherit;
+			@include fade-out(0.5);
+		}
+		.delete {
+			color: $soft-red;
+			@include fade-out(0.5);
+		}
+	}
+	.content {
+		grid-area: ct;
+		max-width: 90%;
+		> span {
+			color: $moderate-blue;
+			font-weight: $fnt-bolder;
+		}
+	}
 }

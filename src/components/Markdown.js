@@ -1,20 +1,21 @@
-import React, { useState } from "react";
-import { useGlobalContext } from "../context";
+import React, { useState } from 'react';
+import { useGlobalContext } from '../context';
 // import timeSince from "../timeTracker";
 
 export default function Markdown(props) {
-  const { currUser, currId, actionType, handleAdd, handleEdit, changeAction } =
-    useGlobalContext();
-  const { label, replyId = null, initialText = "" } = props;
-  const [text, setText] = useState(initialText);
+	const { currUser, currId, actionType, handleAdd, handleEdit, changeAction } =
+		useGlobalContext();
+	const { label, replyId = null, initialText = '' } = props;
+	const [text, setText] = useState(initialText);
 
-  /*----------------------------------FUNCTIONS--------------------------------*/
+	/*----------------------------------FUNCTIONS--------------------------------*/
 
-  const isDisabled = text.length === 0; //***** *//
+	const isDisabled = text.length === 0; //***** *//
 
-  function handleSubmit(event) {
-    event.preventDefault();
+	function handleSubmit(event) {
+		event.preventDefault();
 
+<<<<<<< HEAD
     if (actionType === "edit") {
       handleEdit(currId, text);
       changeAction(null);
@@ -28,21 +29,36 @@ export default function Markdown(props) {
         user: currUser, // never pass userId to API
         replies: [],
       };
+=======
+		if (actionType === 'edit') {
+			handleEdit(currId, text);
+			changeAction(null);
+		} else {
+			const input = {
+				id: Math.random().toString(36).substring(2, 9), // *********//
+				content: text,
+				createdAt: new Date().toLocaleDateString(), //timeSince(new Date(Date.now()))
+				score: 0,
+				replyingTo: '',
+				user: currUser, // never pass userId to API
+				replies: [],
+			};
+>>>>>>> e403b0aec753d395efd41d375e42e7915817623d
 
-      handleAdd(input, replyId);
-      setText("");
-    }
-  }
+			handleAdd(input, replyId);
+			setText('');
+		}
+	}
 
-  /* 
+	/* 
     ============
       MARKDOWN
     =============
 
   */
-  return (
-    <div>
-      {/* 
+	return (
+		<div>
+			{/* 
       ============
       You would create two classes for the form:
       1) For the normal markdown with grid - 3 columns
@@ -52,6 +68,7 @@ export default function Markdown(props) {
       =============
       */}
 
+<<<<<<< HEAD
       <form
         className={initialText !== "" ? `edit-form` : `add-my-comment`}
         //because initialText is empty in commenting state
@@ -82,4 +99,37 @@ export default function Markdown(props) {
       </form>
     </div>
   );
+=======
+			<form
+				className={actionType === 'edit' ? `edit-form` : `add-my-comment`}
+				onSubmit={handleSubmit}
+			>
+				{/* User image not displayed in edit state */}
+				{actionType !== 'edit' && (
+					<div className="img">
+						<img src={currUser.image.webp} alt={currUser.username} />
+					</div>
+				)}
+
+				{/* changed to textarea */}
+				<textarea
+					type="text"
+					placeholder="Add a comment"
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+				/>
+				{actionType !== 'edit' && (
+					<button disabled={isDisabled}>{label}</button>
+				)}
+
+				{/*please style this div such that the button is on the right (click edit to view)*/}
+				{actionType === 'edit' && (
+					<div>
+						<button>{label}</button>
+					</div>
+				)}
+			</form>
+		</div>
+	);
+>>>>>>> e403b0aec753d395efd41d375e42e7915817623d
 }

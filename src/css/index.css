@@ -24,9 +24,12 @@ hr,
   border: none; }
 
 button {
-  cursor: pointer; }
+  cursor: pointer;
+  background: transparent;
+  display: inline-block; }
 
-.flex, .comment-section .comment .likes, .comment-section .comment .likes p, .comment-section .comment .identity, .comment-section .comment .reply-button, .comment-section .add-my-comment {
+.flex, .comment-section .comment .likes, .comment-section .comment .likes p, .comment-section .comment .identity, .comment-section .comment .reply-button, .comment-section .comment .edit-delete, .comment-section .comment .edit-delete .edit,
+.comment-section .comment .edit-delete .delete, .comment-section .add-my-comment {
   display: flex;
   justify-content: space-between;
   align-items: center; }
@@ -42,7 +45,7 @@ input::-webkit-inner-spin-button {
   margin: 0; }
 
 /* Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield; }
 
 .img > img {
@@ -66,7 +69,7 @@ ul.container {
   border: 1px solid #e6e6e6;
   display: grid;
   grid-template-columns: 4rem repeat(4, 1fr);
-  grid-template-areas: "li id id tm tm re" "li ct ct ct ct ct" "sm ct ct ct ct ct";
+  grid-template-areas: 'li id id tm tm re' 'li ct ct ct ct ct' 'sm ct ct ct ct ct';
   gap: 1rem 0;
   align-items: center;
   padding: 1rem;
@@ -81,6 +84,10 @@ ul.container {
     justify-content: center;
     width: 2rem;
     background-color: #f5f6fa; }
+    .comment-section .comment .likes button svg path {
+      transition: fill 300ms ease-out; }
+    .comment-section .comment .likes button:hover path {
+      fill: #5457b6; }
     .comment-section .comment .likes p {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
@@ -97,27 +104,60 @@ ul.container {
     grid-area: id;
     font-weight: 700;
     color: #324152;
-    gap: 1rem; }
+    gap: 1rem;
+    margin-right: 1rem; }
     .comment-section .comment .identity img {
       height: 2rem; }
+    .comment-section .comment .identity > button {
+      background-color: #5457b6;
+      color: white;
+      padding-left: 0.3rem;
+      padding-right: 0.3rem;
+      padding-bottom: 0.1rem;
+      border: none; }
   .comment-section .comment .time {
     grid-area: tm; }
-  .comment-section .comment .reply-button {
+  .comment-section .comment .reply-button, .comment-section .comment .edit-delete {
     grid-area: re;
     background-color: transparent;
     color: #5457b6;
     justify-content: center;
     gap: 0.5rem;
-    font-weight: 700; }
+    font-weight: 700;
+    transition: opacity 300ms ease-out; }
+    .comment-section .comment .reply-button:hover, .comment-section .comment .edit-delete:hover {
+      opacity: 0.5; }
+  .comment-section .comment .edit-delete {
+    gap: 0.7rem;
+    transition: opacity 300ms ease-out; }
+    .comment-section .comment .edit-delete:hover {
+      opacity: 1; }
+    .comment-section .comment .edit-delete .edit,
+    .comment-section .comment .edit-delete .delete {
+      gap: 0.5rem;
+      font-weight: inherit; }
+    .comment-section .comment .edit-delete .edit {
+      color: inherit;
+      transition: opacity 300ms ease-out; }
+      .comment-section .comment .edit-delete .edit:hover {
+        opacity: 0.5; }
+    .comment-section .comment .edit-delete .delete {
+      color: #ed6468;
+      transition: opacity 300ms ease-out; }
+      .comment-section .comment .edit-delete .delete:hover {
+        opacity: 0.5; }
   .comment-section .comment .content {
     grid-area: ct;
-    max-width: 24rem; }
+    max-width: 90%; }
+    .comment-section .comment .content > span {
+      color: #5457b6;
+      font-weight: 700; }
 
 .comment-section .reply-section {
   position: relative;
   margin-left: 60px; }
   .comment-section .reply-section::before {
-    content: " ";
+    content: ' ';
     position: absolute;
     display: block;
     width: 2px;
@@ -125,3 +165,35 @@ ul.container {
     left: -30px;
     top: 0.7rem;
     bottom: 0.7rem; }
+
+.comment-section .add-my-comment {
+  align-items: flex-start;
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #e6e6e6; }
+  .comment-section .add-my-comment .img {
+    height: 2.5rem; }
+  .comment-section .add-my-comment textarea {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    padding: 0.5rem;
+    flex: 1;
+    border: 1px solid #e6e6e6;
+    height: 100px; }
+    .comment-section .add-my-comment textarea::-webkit-resizer {
+      display: none; }
+    .comment-section .add-my-comment textarea::placeholder {
+      font-weight: 700; }
+    .comment-section .add-my-comment textarea:focus {
+      border: none;
+      outline: 1px solid #5457b6; }
+  .comment-section .add-my-comment > button {
+    background-color: #5457b6;
+    border-radius: 5px;
+    padding: 0.5rem;
+    color: white;
+    transition: opacity 300ms ease-out; }
+    .comment-section .add-my-comment > button:hover {
+      opacity: 0.5; }

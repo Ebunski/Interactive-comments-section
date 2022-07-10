@@ -1,19 +1,20 @@
-import React, { useState } from "react";
-import { useGlobalContext } from "../context";
+import React, { useState } from 'react';
+import { useGlobalContext } from '../context';
 // import timeSince from "../timeTracker";
 
 export default function Markdown(props) {
-  const { currUser, currId, actionType, handleAdd, handleEdit, changeAction } =
-    useGlobalContext();
-  const { label, replyId = null, initialText = "" } = props;
-  const [text, setText] = useState(initialText);
+	const { currUser, currId, actionType, handleAdd, handleEdit, changeAction } =
+		useGlobalContext();
+	const { label, replyId = null, initialText = '' } = props;
+	const [text, setText] = useState(initialText);
 
-  /*----------------------------------FUNCTIONS--------------------------------*/
+	/*----------------------------------FUNCTIONS--------------------------------*/
 
-  const isDisabled = text.length === 0; //***** *//
+	const isDisabled = text.length === 0; //***** *//
 
-  function handleSubmit(event) {
-    event.preventDefault();
+	function handleSubmit(event) {
+		event.preventDefault();
+
 
     if (actionType === "edit") {
       handleEdit(currId, text);
@@ -29,20 +30,20 @@ export default function Markdown(props) {
         replies: [],
       };
 
-      handleAdd(input, replyId);
-      setText("");
-    }
-  }
+			handleAdd(input, replyId);
+			setText('');
+		}
+	}
 
-  /* 
+	/* 
     ============
       MARKDOWN
     =============
 
   */
-  return (
-    <div>
-      {/* 
+	return (
+		<div>
+			{/* 
       ============
       You would create two classes for the form:
       1) For the normal markdown with grid - 3 columns
@@ -51,6 +52,7 @@ export default function Markdown(props) {
 
       =============
       */}
+
 
       <form
         className={initialText !== "" ? `edit-form` : `add-my-comment`}
@@ -82,4 +84,5 @@ export default function Markdown(props) {
       </form>
     </div>
   );
+
 }

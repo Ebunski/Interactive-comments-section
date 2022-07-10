@@ -1,27 +1,66 @@
+div#root {
+	display: grid;
+}
 ul.container {
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 650px;
-  min-height: 100vh;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 650px;
+	min-height: 100vh;
 }
 .comment-section {
-  @import "comment";
-  .reply-section {
-    margin-left: 50px;
-    .separator {
-      // This is where I got stuck. maybe you could help
-      display: flex;
-      flex-flow: column;
-      height: 90%;
-      width: 5px;
-      background-color: red;
-      @include margin-inline(2rem);
-      @include margin-block(auto);
-    }
-  }
-  .add-my-comment {
-    @extend .flex;
-  }
+	@import 'comment';
+	.reply-section {
+		position: relative;
+		margin-left: 60px;
+		&::before {
+			content: ' ';
+			position: absolute;
+			display: block;
+			width: 2px;
+			background: darken($light-gray, 5%);
+			left: -30px;
+			top: 0.7rem;
+			bottom: 0.7rem;
+		}
+	}
+	.add-my-comment {
+		@extend .flex;
+		align-items: flex-start;
+		background-color: $white;
+		padding: 1rem;
+		margin-bottom: 1rem;
+		border-radius: 5px;
+		border: $block-border;
+
+		.img {
+			height: 2.5rem;
+		}
+		textarea {
+			@include margin-inline(1rem);
+			padding: 0.5rem;
+			flex: 1;
+			border: $block-border;
+			height: 100px;
+			&::-webkit-resizer {
+				display: none;
+			}
+			&::placeholder {
+				font-weight: $fnt-bolder;
+			}
+			&:focus {
+				border: none;
+				outline: 1px solid $moderate-blue;
+				border-radius: 5px;
+			}
+		}
+		> button {
+			background-color: $moderate-blue;
+			border-radius: 5px;
+			padding: 0.5rem;
+			color: $white;
+			@include fade-out(0.5);
+		}
+	}
 }

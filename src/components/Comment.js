@@ -1,6 +1,8 @@
-import React from 'react';
-import { useGlobalContext } from '../context';
-import Markdown from './Markdown';
+import React from "react";
+import { useGlobalContext } from "../context";
+import Markdown from "./Markdown";
+import TimeAgo from "react-timeago";
+
 
 export default function Comment(props) {
 	const {
@@ -32,10 +34,10 @@ export default function Comment(props) {
 		parentId = null, //used to place the replies
 	} = props;
 
-	// const fiveMinutes = 300000;
-	// const timeElapsed = new Date() - new Date(createdAt) > fiveMinutes;
-	const authentication = user.username === currUser.username;
-	const canEdit = authentication; //{&& !timeElapsed;
+  const fiveMinutes = 300000;
+  const timeElapsed = new Date() - new Date(createdAt) > fiveMinutes;
+  const authentication = user.username === currUser.username;
+  const canEdit = authentication && !timeElapsed;
 
 	const replyId = parentId ? parentId : id; //passed to markdown to place reply
 
@@ -43,7 +45,15 @@ export default function Comment(props) {
 		<Comment key={x.id} {...x} replyingTo={x.replyingTo} parentId={id} />
 	)); //-----------***recursive***---------//
 
-	/*
+
+  function formatter(value, unit, suffix) {
+    if (unit === "second") return "Just now";
+    if (value > 1) return `${value} ${unit}s ${suffix}`;
+    return `${value} ${unit} ${suffix}`;
+  }
+
+  /*
+
 =============== 
 update styles for num
 
@@ -68,15 +78,16 @@ Comment component
 
 					<p className="num">{score}</p>
 
-					<button className="minus" onClick={() => vote(id, 'minus')}>
-						<svg width="11" height="3" xmlns="http://www.w3.org/2000/svg">
-							<path
-								d="M9.256 2.66c.204 0 .38-.056.53-.167.148-.11.222-.243.222-.396V.722c0-.152-.074-.284-.223-.395a.859.859 0 0 0-.53-.167H.76a.859.859 0 0 0-.53.167C.083.437.009.57.009.722v1.375c0 .153.074.285.223.396a.859.859 0 0 0 .53.167h8.495Z"
-								fill="#C5C6EF"
-							/>
-						</svg>{' '}
-					</button>
-				</div>
+        <div className="identity">
+          <img className="avatar" src={user.image.png} alt={user.username} />
+          <div className="name">{user.username}</div>
+          {/* ---style this----(displays if its current user)*/}
+          {authentication && <button>you</button>}
+        </div>
+        <div className="time">
+          <TimeAgo date={createdAt} formatter={formatter} />
+        </div>
+
 
 				<div className="identity">
 					<img className="avatar" src={user.image.png} alt={user.username} />

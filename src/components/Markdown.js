@@ -15,20 +15,20 @@ export default function Markdown(props) {
 	function handleSubmit(event) {
 		event.preventDefault();
 
-    if (actionType === "edit") {
-      handleEdit(currId, text);
-      changeAction(null);
-    } else {
-      const input = {
-        id: Math.random().toString(36).substring(2, 9), // *********//
-        content: text,
-        createdAt: new Date(), //timeSince(new Date(Date.now()))
-        score: 1,
+		if (actionType === 'edit') {
+			handleEdit(currId, text);
+			changeAction(null);
+		} else {
+			const input = {
+				id: Math.random().toString(36).substring(2, 9), // *********//
+				content: text,
+				createdAt: new Date(), //timeSince(new Date(Date.now()))
+				score: 1,
 
-        replyingTo: "",
-        user: currUser, // never pass userId to API
-        replies: [],
-      };
+				replyingTo: '',
+				user: currUser, // never pass userId to API
+				replies: [],
+			};
 
 			handleAdd(input, replyId);
 			setText('');
@@ -53,71 +53,29 @@ export default function Markdown(props) {
       =============
       */}
 
-      <form
-        className={initialText !== "" ? `edit-form` : `add-my-comment`}
-        //because initialText is empty in commenting state
-        onSubmit={handleSubmit}
-      >
-        {/* User image not displayed in edit state */}
-        {initialText === "" && (
-          <div className="img">
-            <img src={currUser.image.webp} alt={currUser.username} />
-          </div>
-        )}
+			<form
+				className={initialText !== '' ? `edit-form` : `add-my-comment`}
+				//because initialText is empty in commenting state
+				onSubmit={handleSubmit}
+			>
+				{/* User image not displayed in edit state */}
+				{initialText === '' && (
+					<div className="img">
+						<img src={currUser.image.webp} alt={currUser.username} />
+					</div>
+				)}
 
-        {/* changed to textarea */}
-        <textarea
-          type="text"
-          placeholder="Add a comment"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        {initialText === "" && <button disabled={isDisabled}>{label}</button>}
-
-        {/*please style this div such that the button is on the right (click edit to view)*/}
-        {initialText !== "" && (
-          <div>
-            <button>{label}</button>
-          </div>
-        )}
-      </form>
-    </div>
-  );
-
-
-      <form
-        className={initialText !== "" ? `edit-form` : `add-my-comment`}
-        //because initialText is empty in commenting state
-        onSubmit={handleSubmit}
-      >
-        {/* User image not displayed in edit state */}
-        {initialText === "" && (
-          <div className="img">
-            <img src={currUser.image.webp} alt={currUser.username} />
-          </div>
-        )}
-
-        {/* changed to textarea */}
-        <textarea
-          type="text"
-          placeholder="Add a comment"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-        {initialText === "" && <button disabled={isDisabled}>{label}</button>}
-
-        {/*please style this div such that the button is on the right (click edit to view)*/}
-        {initialText !== "" && (
-          <div>
-            <button>{label}</button>
-          </div>
-        )}
-      </form>
-    </div>
-  );
+				{/* changed to textarea */}
+				<textarea
+					type="text"
+					placeholder="Add a comment"
+					value={text}
+					onChange={(e) => setText(e.target.value)}
+				/>
+				{initialText === '' && <button disabled={isDisabled}>{label}</button>}
 
 				{/*please style this div such that the button is on the right (click edit to view)*/}
-				{actionType === 'edit' && (
+				{initialText !== '' && (
 					<div>
 						<button>{label}</button>
 					</div>
@@ -126,4 +84,44 @@ export default function Markdown(props) {
 		</div>
 	);
 
+	// <form
+	// 	className={initialText !== '' ? `edit-form` : `add-my-comment`}
+	// 	//because initialText is empty in commenting state
+	// 	onSubmit={handleSubmit}
+	// >
+	// 	{/* User image not displayed in edit state */}
+	// 	{initialText === '' && (
+	// 		<div className="img">
+	// 			<img src={currUser.image.webp} alt={currUser.username} />
+	// 		</div>
+	// 	)}
+
+	// 	{/* changed to textarea */}
+	// 	<textarea
+	// 		type="text"
+	// 		placeholder="Add a comment"
+	// 		value={text}
+	// 		onChange={(e) => setText(e.target.value)}
+	// 	/>
+	// 	{initialText === '' && <button disabled={isDisabled}>{label}</button>}
+
+	// 	{/*please style this div such that the button is on the right (click edit to view)*/}
+	// 	{initialText !== '' && (
+	// 		<div>
+	// 			<button>{label}</button>
+	// 		</div>
+	// 	)}
+	// </form>;
+	// </div>
+	// );
+
+	/*please style this div such that the button is on the right (click edit to view)*/
+	// 			{actionType === 'edit' && (
+	// 				<div>
+	// 					<button>{label}</button>
+	// 				</div>
+	// 			)}
+	// 		</form>
+	// 	</div>
+	// );
 }

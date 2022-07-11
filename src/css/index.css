@@ -29,7 +29,7 @@ button {
   display: inline-block; }
 
 .flex, .comment-section .comment .likes, .comment-section .comment .likes p, .comment-section .comment .identity, .comment-section .comment .reply-button, .comment-section .comment .edit-delete, .comment-section .comment .edit-delete .edit,
-.comment-section .comment .edit-delete .delete, .comment-section .add-my-comment {
+.comment-section .comment .edit-delete .delete, .comment-section .add-my-comment, .comment-section form.edit-form, .modal-overlay .modal-content footer {
   display: flex;
   justify-content: space-between;
   align-items: center; }
@@ -166,34 +166,87 @@ ul.container {
     top: 0.7rem;
     bottom: 0.7rem; }
 
-.comment-section .add-my-comment {
+.comment-section .add-my-comment, .comment-section form.edit-form {
   align-items: flex-start;
   background-color: white;
   padding: 1rem;
   margin-bottom: 1rem;
   border-radius: 5px;
   border: 1px solid #e6e6e6; }
-  .comment-section .add-my-comment .img {
+  .comment-section .add-my-comment .img, .comment-section form.edit-form .img {
     height: 2.5rem; }
-  .comment-section .add-my-comment textarea {
+  .comment-section .add-my-comment textarea, .comment-section form.edit-form textarea {
     margin-left: 1rem;
     margin-right: 1rem;
     padding: 0.5rem;
     flex: 1;
     border: 1px solid #e6e6e6;
     height: 100px; }
-    .comment-section .add-my-comment textarea::-webkit-resizer {
+    .comment-section .add-my-comment textarea::-webkit-resizer, .comment-section form.edit-form textarea::-webkit-resizer {
       display: none; }
-    .comment-section .add-my-comment textarea::placeholder {
+    .comment-section .add-my-comment textarea::placeholder, .comment-section form.edit-form textarea::placeholder {
       font-weight: 700; }
-    .comment-section .add-my-comment textarea:focus {
+    .comment-section .add-my-comment textarea:focus, .comment-section form.edit-form textarea:focus {
       border: none;
-      outline: 1px solid #5457b6; }
-  .comment-section .add-my-comment > button {
+      outline: 1px solid #5457b6;
+      border-radius: 5px; }
+  .comment-section .add-my-comment button, .comment-section form.edit-form button {
     background-color: #5457b6;
     border-radius: 5px;
     padding: 0.5rem;
     color: white;
+    text-transform: capitalize;
     transition: opacity 300ms ease-out; }
-    .comment-section .add-my-comment > button:hover {
+    .comment-section .add-my-comment button:hover, .comment-section form.edit-form button:hover {
       opacity: 0.5; }
+
+.comment-section form.edit-form {
+  grid-area: ct;
+  align-items: flex-end;
+  border: none;
+  padding: 0;
+  flex-direction: column;
+  gap: 1rem;
+  height: 150px;
+  max-height: 500px;
+  transition: max-height 300ms ease-out; }
+  .comment-section form.edit-form textarea {
+    width: 100%;
+    margin: 0; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: #00000085;
+  transform: scale(1);
+  transition: transform 300ms ease-out; }
+  .modal-overlay .modal-content {
+    position: absolute;
+    background-color: white;
+    border-radius: 5px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 18rem;
+    max-width: 20rem;
+    padding: 2rem; }
+    .modal-overlay .modal-content h1 {
+      margin-top: 1rem;
+      margin-bottom: 1rem; }
+    .modal-overlay .modal-content footer {
+      margin-top: 1rem;
+      margin-bottom: 1rem; }
+      .modal-overlay .modal-content footer button {
+        padding: 0.7rem;
+        border-radius: 5px;
+        color: white;
+        font-weight: 700;
+        text-transform: uppercase;
+        white-space: nowrap;
+        transition: opacity 300ms ease-out; }
+        .modal-overlay .modal-content footer button:hover {
+          opacity: 0.3; }
+        .modal-overlay .modal-content footer button:first-of-type {
+          background-color: #324152; }
+        .modal-overlay .modal-content footer button:nth-of-type(2) {
+          background-color: #ed6468; }

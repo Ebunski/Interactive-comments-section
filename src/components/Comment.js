@@ -108,12 +108,12 @@ Comment component
 				{/* renders edit and delete if five minutes has not elapsed and it is the user id */}
 				{canEdit ? (
 					<div className="edit-delete">
-						<button className="edit" onClick={() => handleDelete(id)}>
+						<button className="delete" onClick={() => handleDelete(id)}>
 							<img src={del} alt="icon-delete" />
 							<span>Delete</span>
 						</button>
 
-						<button className="delete" onClick={() => changeAction(id, 'edit')}>
+						<button className="edit" onClick={() => changeAction(id, 'edit')}>
 							<img src={edit} alt="icon-edit" />
 							<span>Edit</span>
 						</button>

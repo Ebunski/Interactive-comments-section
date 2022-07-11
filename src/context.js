@@ -47,7 +47,7 @@ export function AppProvider({ children }) {
         }),
       };
     });
-    setComments(voted);
+    setComments(voted.sort((a, b) => b.score - a.score));
   }
 
   function handleAdd(text, parentId) {
@@ -57,7 +57,9 @@ export function AppProvider({ children }) {
       );
       return setComments(newComments);
     }
-    setComments((prev) => [...prev, text]);
+    const added = [...comments, text].sort((a, b) => b.score - a.score);
+
+    setComments(added);
     setCurrId(null);
   }
 
@@ -75,7 +77,6 @@ export function AppProvider({ children }) {
     setIsModalOpen(false);
     setCurrId(null);
   }
-  console.log(new Date().getMinutes());
 
   function handleEdit(id, text) {
     const updatedComments = comments.map((x) =>

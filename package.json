@@ -24,9 +24,10 @@
     "url": "https://github.com/Catalyst497/Interactive-comments-section/issues"
   },
   "dependencies": {
-    "node-sass": "^7.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-time-ago": "^7.2.1",
+    "react-timeago": "^7.1.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

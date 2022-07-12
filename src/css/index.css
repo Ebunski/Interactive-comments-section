@@ -75,6 +75,11 @@ ul.container {
   padding: 1rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem; }
+  @media (max-width: 450px) {
+    .comment-section .comment {
+      margin: 0.5rem;
+      grid-template-columns: repeat(6, 1fr);
+      grid-template-areas: 'id id id tm tm tm' 'ct ct ct ct ct ct' 'li li sm sm re re'; } }
   .comment-section .comment .likes {
     grid-area: li;
     margin: auto;
@@ -84,6 +89,15 @@ ul.container {
     justify-content: center;
     width: 2rem;
     background-color: #f5f6fa; }
+    @media (max-width: 450px) {
+      .comment-section .comment .likes {
+        flex-direction: row-reverse;
+        width: auto; } }
+    @media (max-width: 450px) {
+      .comment-section .comment .likes button {
+        padding: 0.3rem 1rem; }
+        .comment-section .comment .likes button.minus {
+          padding-bottom: 0.5rem; } }
     .comment-section .comment .likes button svg path {
       transition: fill 300ms ease-out; }
     .comment-section .comment .likes button:hover path {
@@ -99,6 +113,9 @@ ul.container {
     .comment-section .comment .likes > * {
       width: 100%;
       background-color: transparent; }
+      @media (max-width: 450px) {
+        .comment-section .comment .likes > * {
+          width: auto; } }
   .comment-section .comment .identity {
     justify-content: flex-start;
     grid-area: id;
@@ -117,6 +134,9 @@ ul.container {
       border: none; }
   .comment-section .comment .time {
     grid-area: tm; }
+    @media (max-width: 450px) {
+      .comment-section .comment .time {
+        text-align: center; } }
   .comment-section .comment .reply-button, .comment-section .comment .edit-delete {
     grid-area: re;
     background-color: transparent;
@@ -156,6 +176,9 @@ ul.container {
 .comment-section .reply-section {
   position: relative;
   margin-left: 60px; }
+  @media (max-width: 450px) {
+    .comment-section .reply-section {
+      margin-left: 2rem; } }
   .comment-section .reply-section::before {
     content: ' ';
     position: absolute;
@@ -165,6 +188,9 @@ ul.container {
     left: -30px;
     top: 0.7rem;
     bottom: 0.7rem; }
+    @media (max-width: 450px) {
+      .comment-section .reply-section::before {
+        left: -0.5rem; } }
 
 .comment-section .add-my-comment, .comment-section form.edit-form {
   align-items: flex-start;
@@ -173,6 +199,9 @@ ul.container {
   margin-bottom: 1rem;
   border-radius: 5px;
   border: 1px solid #e6e6e6; }
+  @media (max-width: 450px) {
+    .comment-section .add-my-comment, .comment-section form.edit-form {
+      margin: 0.5rem; } }
   .comment-section .add-my-comment .img, .comment-section form.edit-form .img {
     height: 2.5rem; }
   .comment-section .add-my-comment textarea, .comment-section form.edit-form textarea {
@@ -199,6 +228,24 @@ ul.container {
     transition: opacity 300ms ease-out; }
     .comment-section .add-my-comment button:hover, .comment-section form.edit-form button:hover {
       opacity: 0.5; }
+  @media (max-width: 450px) {
+    .comment-section .add-my-comment, .comment-section form.edit-form {
+      display: grid;
+      gap: 1rem 0;
+      grid-template-columns: repeat(5, 1fr);
+      justify-content: space-around; }
+      .comment-section .add-my-comment textarea, .comment-section form.edit-form textarea {
+        order: 1;
+        grid-column: 1/-1; }
+      .comment-section .add-my-comment .img, .comment-section form.edit-form .img {
+        order: 2;
+        grid-column: 1/2;
+        width: 2.5rem;
+        margin-left: 1rem; }
+      .comment-section .add-my-comment button, .comment-section form.edit-form button {
+        order: 3;
+        grid-column: -2/-1;
+        margin-right: 1rem; } }
 
 .comment-section form.edit-form {
   grid-area: ct;
@@ -213,6 +260,9 @@ ul.container {
   .comment-section form.edit-form textarea {
     width: 100%;
     margin: 0; }
+  @media (max-width: 450px) {
+    .comment-section form.edit-form textarea {
+      order: 0; } }
 
 .modal-overlay {
   position: fixed;

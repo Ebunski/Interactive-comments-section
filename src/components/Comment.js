@@ -65,7 +65,7 @@ Comment component
 	return (
 		<>
 			{/*To fix article-li dispute*/}
-			<article className="comment">
+			<article data-aos="fade-right" className="comment">
 				<div className="likes">
 					<button className="plus" onClick={() => vote(id, 'plus')}>
 						<svg width="11" height="11" xmlns="http://www.w3.org/2000/svg">

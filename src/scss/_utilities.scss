@@ -77,6 +77,11 @@ input[type='number'] {
 		opacity: $amnt;
 	}
 }
+@mixin mobile($size) {
+	@media (max-width: $size) {
+		@content;
+	}
+}
 //attribution
 .attribution {
 	// position: absolute;

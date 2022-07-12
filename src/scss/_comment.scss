@@ -12,6 +12,15 @@
 	align-items: center;
 	padding: 1rem;
 	@include margin-block(0.5rem);
+	@include mobile(450px) {
+		margin: 0.5rem;
+		grid-template-columns: repeat(6, 1fr);
+
+		grid-template-areas:
+			'id id id tm tm tm'
+			'ct ct ct ct ct ct'
+			'li li sm sm re re';
+	}
 	.likes {
 		grid-area: li;
 		margin: auto;
@@ -22,7 +31,17 @@
 		justify-content: center;
 		width: 2rem;
 		background-color: $light-gray;
+		@include mobile(450px) {
+			flex-direction: row-reverse;
+			width: auto;
+		}
 		button {
+			@include mobile(450px) {
+				padding: 0.3rem 1rem;
+				&.minus {
+					padding-bottom: 0.5rem;
+				}
+			}
 			svg {
 				path {
 					@include transition(fill);
@@ -44,6 +63,9 @@
 		> * {
 			width: 100%;
 			background-color: transparent;
+			@include mobile(450px) {
+				width: auto;
+			}
 		}
 	}
 	.identity {
@@ -67,6 +89,9 @@
 	}
 	.time {
 		grid-area: tm;
+		@include mobile(450px) {
+			text-align: center;
+		}
 	}
 	.reply-button {
 		grid-area: re;

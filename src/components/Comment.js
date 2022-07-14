@@ -128,18 +128,23 @@ Comment component
         <div className="content">
           {actionType === "edit" && currId === id ? (
             <Markdown label="update" initialText={content} />
-          ) : (
+          ) : replyingTo ? (
             <p>
-              {replyingTo !== "" && <span>@{replyingTo} </span>}{" "}
-              {/* if a reply */}
+              <span>@{replyingTo} </span>
               {content}
             </p>
+          ) : (
+            <p>{content}</p>
           )}
         </div>
       </article>
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
       {actionType === "reply" && currId === id && (
-        <Markdown label="reply" replyId={replyId} replyName={user.username} />
+        <Markdown
+          label="reply"
+          replyId={replyId}
+          initialText={`${"@"}${user.username}`}
+        />
       )}
       {/*--------------replies ---------------------------*/}
       {replies.length > 0 && <div className="reply-section">{replyList}</div>}

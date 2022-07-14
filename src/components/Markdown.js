@@ -4,7 +4,7 @@ import { useGlobalContext } from "../context";
 export default function Markdown(props) {
   const { currUser, currId, actionType, handleAdd, handleEdit, changeAction } =
     useGlobalContext();
-  const { label, replyId = null, initialText = "", replyName = null } = props;
+  const { label, replyId = null, initialText = "" } = props;
   const [text, setText] = useState(initialText);
 
   // Added this path to the front all images.... :) :) :)
@@ -23,10 +23,10 @@ export default function Markdown(props) {
     } else {
       const input = {
         id: Math.random().toString(36).substring(2, 9), // *********//
-        content: text,
+        content: text.slice(initialText.length), //removes tag
         createdAt: new Date(), //timeSince(new Date(Date.now()))
         score: 0,
-        replyingTo: replyName,
+        replyingTo: initialText.slice(1), //removes @ from tag
         user: currUser, // never pass userId to API
         replies: [],
       };
@@ -36,6 +36,7 @@ export default function Markdown(props) {
       changeAction(null);
     }
   }
+  console.log(currId, replyId);
 
   /* 
     ============
@@ -56,12 +57,11 @@ export default function Markdown(props) {
       */}
 
       <form
-        className={initialText !== "" ? `edit-form` : `add-my-comment`}
-        //because initialText is empty in commenting state
+        className={actionType === "edit" ? `edit-form` : `add-my-comment`}
         onSubmit={handleSubmit}
       >
         {/* User image not displayed in edit state */}
-        {initialText === "" && (
+        {actionType !== "edit" && (
           <div className="img">
             <img
               src={PUBLIC_URL + currUser.image.webp}
@@ -77,10 +77,12 @@ export default function Markdown(props) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-        {initialText === "" && <button disabled={isDisabled}>{label}</button>}
+        {actionType !== "edit" && (
+          <button disabled={isDisabled}>{label}</button>
+        )}
 
         {/*please style this div such that the button is on the right (click edit to view)*/}
-        {initialText !== "" && (
+        {actionType === "edit" && (
           <div>
             <button>{label}</button>
           </div>

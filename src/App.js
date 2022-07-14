@@ -8,8 +8,8 @@ export default function App() {
   const { comments, isModalOpen } = useGlobalContext();
 
   const commentList = comments.map((x) => <Comment key={x.id} {...x} />);
+
   return (
-    // container not centralised- margin auto maybe? or flex sha
     <ul className="container">
       <li className="comment-section">
         {commentList}

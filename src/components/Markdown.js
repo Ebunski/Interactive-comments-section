@@ -12,15 +12,17 @@ export default function Markdown(props) {
 
   /*----------------------------------FUNCTIONS--------------------------------*/
 
-  const isDisabled = text.length === 0; //***** *//
+  const isDisabled = text.length <= initialText.length; //***** *//
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    if (actionType === "edit") {
+    if (actionType === "edit" && text !== "") {
       handleEdit(currId, text);
       changeAction(null);
-    } else {
+      return;
+    }
+    if (!isDisabled) {
       const input = {
         id: Math.random().toString(36).substring(2, 9), // *********//
         content: text.slice(initialText.length), //removes tag
@@ -36,7 +38,6 @@ export default function Markdown(props) {
       changeAction(null);
     }
   }
-  console.log(currId, replyId);
 
   /* 
     ============
@@ -46,22 +47,16 @@ export default function Markdown(props) {
   */
   return (
     <div>
-      {/* 
-      ============
-      You would create two classes for the form:
-      1) For the normal markdown with grid - 3 columns
-      2) 2nd one for the edit state: one column - called *******"edit-form"********
-      - i created a div wrapping the button for edit - you can use it to position the button on the right 
-
-      =============
-      */}
-
       <form
-        className={actionType === "edit" ? `edit-form` : `add-my-comment`}
+        className={
+          initialText === "" || actionType !== "edit"
+            ? `add-my-comment`
+            : `edit-form`
+        }
         onSubmit={handleSubmit}
       >
-        {/* User image not displayed in edit state */}
-        {actionType !== "edit" && (
+        {/* User image not displayed in edit state or if the textarea is not empty */}
+        {(initialText === "" || actionType !== "edit") && (
           <div className="img">
             <img
               src={PUBLIC_URL + currUser.image.webp}
@@ -70,18 +65,19 @@ export default function Markdown(props) {
           </div>
         )}
 
-        {/* changed to textarea */}
         <textarea
           type="text"
           placeholder="Add a comment"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
+
         {actionType !== "edit" && (
-          <button disabled={isDisabled}>{label}</button>
+          <button className={isDisabled ? "btn-disabled" : null}>
+            {label}
+          </button>
         )}
 
-        {/*please style this div such that the button is on the right (click edit to view)*/}
         {actionType === "edit" && (
           <div>
             <button>{label}</button>

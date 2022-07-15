@@ -11,8 +11,8 @@ export default function Comment(props) {
     handleDelete,
 
     //icons
-    plus,
-    minus,
+    // plus,
+    // minus,
     reply,
     del,
     edit,
@@ -32,6 +32,7 @@ export default function Comment(props) {
     replyingTo = "",
     parentId = null, //used to place the replies
   } = props;
+
   const [voteType, setVoteType] = useState({
     prev: "",
     curr: "default",
@@ -51,12 +52,6 @@ export default function Comment(props) {
     <Comment key={x.id} {...x} replyingTo={x.replyingTo} parentId={id} />
   )); //-----------***recursive***---------//
 
-  function formatter(value, unit, suffix) {
-    if (unit === "second") return "Just now";
-    if (value > 1) return `${value} ${unit}s ${suffix}`;
-    return `${value} ${unit} ${suffix}`;
-  }
-
   function voteHandler(id, type) {
     if (voteType.curr === type && voteType.prev === "default") {
       return;
@@ -68,6 +63,12 @@ export default function Comment(props) {
       vote(id, type);
       setVoteType({ prev: "default", curr: type });
     }
+  }
+
+  function formatter(value, unit, suffix) {
+    if (unit === "second") return "Just now";
+    if (value > 1) return `${value} ${unit}s ${suffix}`;
+    return `${value} ${unit} ${suffix}`;
   }
 
   /*
@@ -146,18 +147,23 @@ Comment component
         <div className="content">
           {actionType === "edit" && currId === id ? (
             <Markdown label="update" initialText={content} />
-          ) : (
+          ) : replyingTo ? (
             <p>
-              {replyingTo !== "" && <span>@{replyingTo} </span>}{" "}
-              {/* if a reply */}
+              <span>@{replyingTo} </span>
               {content}
             </p>
+          ) : (
+            <p>{content}</p>
           )}
         </div>
       </article>
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
       {actionType === "reply" && currId === id && (
-        <Markdown label="reply" replyId={replyId} replyName={user.username} />
+        <Markdown
+          label="reply"
+          replyId={replyId}
+          initialText={`${"@"}${user.username}`}
+        />
       )}
       {/*--------------replies ---------------------------*/}
       {replies.length > 0 && <div className="reply-section">{replyList}</div>}

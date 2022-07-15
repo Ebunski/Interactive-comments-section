@@ -11,8 +11,8 @@ export default function Comment(props) {
     handleDelete,
 
     //icons
-    plus,
-    minus,
+    // plus,
+    // minus,
     reply,
     del,
     edit,

@@ -1,4 +1,7 @@
+/* You can apply transition through z-index and visibility or opacity*/
+
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: #00000085; }
+  background-color: #00000085;
+}

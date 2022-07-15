@@ -58,6 +58,7 @@ export default function Markdown(props) {
         {/* User image not displayed in edit state or if the textarea is not empty */}
         {(initialText === "" || actionType !== "edit") && (
           <div className="img">
+            {/* give img a class and set object-fit:contain */}
             <img
               src={PUBLIC_URL + currUser.image.webp}
               alt={currUser.username}
@@ -71,11 +72,9 @@ export default function Markdown(props) {
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
-
+        {/*----------crreate a disabled class called "btn-disabled"--------- */}
         {actionType !== "edit" && (
-          <button className={isDisabled ? "btn-disabled" : null}>
-            {label}
-          </button>
+          <button className={isDisabled ? "btn-disabled" : ""}>{label}</button>
         )}
 
         {actionType === "edit" && (

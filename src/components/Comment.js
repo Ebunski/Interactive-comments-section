@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGlobalContext } from "../context";
 import Markdown from "./Markdown";
 import TimeAgo from "react-timeago";
@@ -32,6 +32,12 @@ export default function Comment(props) {
     replyingTo = "",
     parentId = null, //used to place the replies
   } = props;
+
+  const [voteType, setVoteType] = useState({
+    prev: "",
+    curr: "default",
+  });
+
   // Added this path to the front all images.... :) :) :)
   const PUBLIC_URL = process.env.PUBLIC_URL + "/";
 

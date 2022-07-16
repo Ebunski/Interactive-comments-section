@@ -3,21 +3,20 @@
 	border-radius: 5px;
 	border: $block-border;
 	display: grid;
-	grid-template-columns: 4rem repeat(4, 1fr);
+	grid-template-columns: 4rem auto auto repeat(3, 1fr);
 	grid-template-areas:
-		'li id id tm tm re'
+		'li id id tm re re'
 		'li ct ct ct ct ct'
 		'sm ct ct ct ct ct';
 	gap: 1rem 0;
 	align-items: center;
 	padding: 1rem;
 	@include margin-block(0.5rem);
-	@include mobile(450px) {
+	@include mobile(400px) {
 		margin: 0.5rem;
 		grid-template-columns: repeat(6, 1fr);
-
 		grid-template-areas:
-			'id id id tm tm tm'
+			'id id id id tm tm'
 			'ct ct ct ct ct ct'
 			'li li sm sm re re';
 	}
@@ -31,12 +30,12 @@
 		justify-content: center;
 		width: 2rem;
 		background-color: $light-gray;
-		@include mobile(450px) {
+		@include mobile(400px) {
 			flex-direction: row-reverse;
 			width: auto;
 		}
 		button {
-			@include mobile(450px) {
+			@include mobile(400px) {
 				padding: 0.3rem 1rem;
 				&.minus {
 					padding-bottom: 0.5rem;
@@ -63,7 +62,7 @@
 		> * {
 			width: 100%;
 			background-color: transparent;
-			@include mobile(450px) {
+			@include mobile(400px) {
 				width: auto;
 			}
 		}
@@ -89,19 +88,17 @@
 	}
 	.time {
 		grid-area: tm;
-		@include mobile(450px) {
-			text-align: center;
-		}
 	}
 	.reply-button {
 		grid-area: re;
 		background-color: transparent;
 		color: $moderate-blue;
 		@extend .flex;
-		justify-content: center;
+		justify-content: flex-end;
 		gap: 0.5rem;
 		font-weight: $fnt-bolder;
 		@include fade-out(0.5);
+		padding-right: 1rem;
 	}
 	.edit-delete {
 		@extend .reply-button;
@@ -125,7 +122,7 @@
 	.content {
 		grid-area: ct;
 		max-width: 90%;
-		> span {
+		span {
 			color: $moderate-blue;
 			font-weight: $fnt-bolder;
 		}

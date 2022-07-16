@@ -46,6 +46,11 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
 	-moz-appearance: textfield;
 }
+input:focus,
+textarea:focus {
+	border: none;
+	outline: none;
+}
 .img {
 	> img {
 		width: 100%;

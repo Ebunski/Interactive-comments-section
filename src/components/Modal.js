@@ -7,6 +7,9 @@ export default function Modal() {
 	// MOdal component is unstyled.
 	// displays onclick of the delete icon at bottom of the page
 	return (
+		// The modal is not transitioning. Please figure out a way of adding
+		// a class of "modal-show" after the element as rendered.
+
 		<div className="modal-overlay">
 			<div className="modal-center">
 				<div className="modal-content">

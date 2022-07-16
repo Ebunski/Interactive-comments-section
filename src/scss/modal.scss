@@ -2,8 +2,7 @@
 	position: fixed;
 	inset: 0;
 	background-color: #00000085;
-	transform: scale(1);
-	@include transition(transform);
+	transform: scale(0);
 	.modal-content {
 		position: absolute;
 		background-color: $white;
@@ -37,4 +36,8 @@
 			}
 		}
 	}
+}
+.modal-show {
+	transform: scale(1);
+	@include transition(transform);
 }

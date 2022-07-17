@@ -1,11 +1,14 @@
 import React from "react";
+
 import Comment from "./components/Comment";
 import Markdown from "./components/Markdown";
 import Modal from "./components/Modal";
 import { useGlobalContext } from "./context";
+import { useScrollAnimation } from "./custom";
 
 export default function App() {
-  const { comments, isModalOpen } = useGlobalContext();
+  const { comments } = useGlobalContext();
+  useScrollAnimation();
 
   const commentList = comments.map((x) => <Comment key={x.id} {...x} />);
 
@@ -14,7 +17,7 @@ export default function App() {
       <ul className="comment-section">
         {commentList}
         <Markdown label="Send" />
-        {isModalOpen && <Modal />}
+        <Modal />
       </ul>
     </main>
   );

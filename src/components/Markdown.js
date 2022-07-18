@@ -11,8 +11,8 @@ export default function Markdown(props) {
   const PUBLIC_URL = process.env.PUBLIC_URL + "/";
 
   /*----------------------------------FUNCTIONS--------------------------------*/
-
-  const isDisabled = text.length <= initialText.length; //***** *//
+  const actualText = text.replace(/\s/g, "");
+  const isDisabled = actualText.length <= initialText.length; //***** *//
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -79,7 +79,9 @@ export default function Markdown(props) {
 
         {actionType === "edit" && (
           <div>
-            <button>{label}</button>
+            <button className={text === "" ? "btn-disabled" : ""}>
+              {label}
+            </button>
           </div>
         )}
       </form>

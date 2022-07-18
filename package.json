@@ -24,6 +24,7 @@
     "url": "https://github.com/Catalyst497/Interactive-comments-section/issues"
   },
   "dependencies": {
+    "aos": "^2.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-time-ago": "^7.2.1",

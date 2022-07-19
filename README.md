@@ -74,7 +74,7 @@ Catalyst : -
       'li ct ct ct ct ct'
       'sm ct ct ct ct ct';
 }
-```
+````
 - Got to sneak peak into React and how it works, gained a lot there.
 
 Overall :-
@@ -98,4 +98,3 @@ Overall :-
 ## Acknowledgments
 
 Thank you frontend mentor.
-````

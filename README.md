@@ -66,21 +66,22 @@ Catalyst : -
 - Got to brush up on my usage of Git and GitHub. Finally, understood what I was doing a bit.
 - Had to revise my knowledge of grid layout(specifically grid-area)
 
-````css
+```css
 .proud-of-this {
   grid-template-columns: 4rem auto auto repeat(3, 1fr);
-    grid-template-areas:
-      'li id id tm re re'
-      'li ct ct ct ct ct'
-      'sm ct ct ct ct ct';
+  grid-template-areas:
+    "li id id tm re re"
+    "li ct ct ct ct ct"
+    "sm ct ct ct ct ct";
 }
-````
+```
+
 - Got to sneak peak into React and how it works, gained a lot there.
 
 Overall :-
 -Teamwork: 1st time i actually collaborated with someone on a project
-- Git and Github - understood the architecture, workflow and other git commands
 
+- Git and Github - understood the architecture, workflow and other git commands
 
 ### Continued development
 
@@ -91,9 +92,10 @@ Overall :-
 
 ## Author
 
-- Frontend Mentor - [@Catalyst497](https://www.frontendmentor.io/profile/Catalyst497)
-- Twitter - [@Catalyst497](https://twitter.com/Catalyst497)
-
+- Website - [coming soon...]
+- LinkedIn - https://www.linkedin.com/in/ebunoluwa-oyebola-1490021b1
+- Twitter - [@Ebun_ski](https://www.twitter.com/Ebun_ski)
+- Email - [ebunoyebola03@gmail.com]
 
 ## Acknowledgments
 

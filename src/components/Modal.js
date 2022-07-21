@@ -4,7 +4,7 @@ import { useGlobalContext } from "../context";
 export default function Modal() {
   const { confirm, isModalOpen } = useGlobalContext();
 
-  // MOdal component is unstyled.
+  // Modal component is unstyled.
   // displays onclick of the delete icon at bottom of the page
   return (
     // The modal is not transitioning. Please figure out a way of adding

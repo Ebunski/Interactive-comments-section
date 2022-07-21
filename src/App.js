@@ -14,11 +14,11 @@ export default function App() {
 
   return (
     <main className="container">
-      <ul className="comment-section">
+      <section className="comment-section">
         {commentList}
         <Markdown label="Send" />
-        <Modal />
-      </ul>
+      </section>
+      <Modal />
     </main>
   );
 }

@@ -36,7 +36,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Intractive comments Section](https://github.com/Catalyst497/Interactive-comments-section)
+- Solution URL: [Interactive comments Section] https://github.com/Ebunski/Interactive-comments-section
 - Live Site URL: https://fm-interactive-comments-section.netlify.app/
 
 ## My process

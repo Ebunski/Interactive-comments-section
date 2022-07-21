@@ -67,7 +67,7 @@ export default function Markdown(props) {
         )}
 
         <textarea
-          type="text"
+
           placeholder="Add a comment"
           value={text}
           onChange={(e) => setText(e.target.value)}

@@ -83,7 +83,7 @@ Comment component
   return (
     <>
       {/*To fix article-li dispute*/}
-      <div data-aos="fade-right" className="comment">
+      <article data-aos="fade-right" className="comment">
         <div className="likes">
           <button
             aria-label="plus-button"
@@ -120,7 +120,9 @@ Comment component
             src={PUBLIC_URL + user.image.png}
             alt={user.username}
           />
-          <div className="name">{user.username}</div>
+
+          <h4 className="name">{user.username}</h4>
+
           {/* ---style this----(displays if its current user)*/}
           {authentication && <button>you</button>}
         </div>
@@ -164,7 +166,7 @@ Comment component
             <p>{content}</p>
           )}
         </div>
-      </div>
+      </article>
       {/*---------renders markdown when reply is clicked and id is ID of the card------------------*/}
       {actionType === "reply" && currId === id && (
         <Markdown
